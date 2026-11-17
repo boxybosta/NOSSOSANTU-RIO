@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHAVES DE ACESSO</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000;
+            color: white;
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login {
+            width: 90%;
+            max-width: 380px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 22px;
+            letter-spacing: 4px;
+            margin-bottom: 30px;
+        }
+
+        .password {
+            width: 100%;
+            height: 45px;
+            background: #111;
+            border: 1px solid #444;
+            color: white;
+            text-align: center;
+            font-size: 16px;
+            margin-bottom: 12px;
+            outline: none;
+        }
+
+        .password:focus {
+            border-color: white;
+        }
+
+        button {
+            width: 100%;
+            height: 45px;
+            margin-top: 15px;
+            background: white;
+            color: black;
+            border: none;
+            font-weight: bold;
+            letter-spacing: 3px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #ccc;
+        }
+
+        #error {
+            color: red;
+            font-weight: bold;
+            margin-top: 25px;
+            display: none;
+            letter-spacing: 2px;
+        }
+
+        /* CONTEÚDO DESBLOQUEADO */
+
+        #content {
+            display: none;
+            width: 90%;
+            max-width: 650px;
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        #content img {
+            width: 100%;
+            max-width: 300px;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            margin-bottom: 30px;
+        }
+
+        #content h2 {
+            font-size: 30px;
+            margin-bottom: 35px;
+            letter-spacing: 1px;
+        }
+
+        .tracklist {
+            list-style: none;
+            line-height: 2;
+            font-size: 16px;
+            color: #ccc;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login" id="login">
+
+        <h1>CHAVES DE ACESSO</h1>
+
+        <input class="password" type="password" placeholder="CHAVE 01">
+        <input class="password" type="password" placeholder="CHAVE 02">
+        <input class="password" type="password" placeholder="CHAVE 03">
+        <input class="password" type="password" placeholder="CHAVE 04">
+        <input class="password" type="password" placeholder="CHAVE 05">
+
+        <button onclick="verificar()">INSERIR</button>
+
+        <p id="error">ACESSO NEGADO</p>
+
+    </div>
+
+
+    <div id="content">
+
+        <!-- INSIRA SUA IMAGEM 1x1 AQUI -->
+        <img src="sua-imagem.png" alt="hERmAN. Inácio ;)">
+
+        <h2>hERmAN. Inácio ;)</h2>
+
+        <ol class="tracklist">
+            <li>1. INTRO PAST TENSE</li>
+            <li>2. Amor não é paixão</li>
+            <li>3. Eu sei que…</li>
+            <li>4. João 2, 19</li>
+            <li>5. Ciúme pt.2</li>
+            <li>6. Opção</li>
+            <li>7. Longa data</li>
+            <li>8. No final de tudo</li>
+            <li>9. Oh, darling</li>
+            <li>10. INTERLÚDIO LUXUOSO</li>
+            <li>11. Santíssima</li>
+            <li>12. Perdido</li>
+            <li>13. Exibicionistas</li>
+            <li>14. Overdose de soda em plena luz urbana</li>
+            <li>15. Calmaí!!</li>
+            <li>16. EsQZTinho :P</li>
+            <li>17. Só do seu feitio</li>
+            <li>18. Jeitos de te chamar de minha</li>
+            <li>19. Sem limites</li>
+            <li>20. Rima das mãos dadas</li>
+            <li>21. OUTRO “ESPERANÇOSAMENTE”</li>
+            <li>22. Todo lugar que você passa <3</li>
+        </ol>
+
+    </div>
+
+
+    <script>
+
+        const chavesCorretas = [
+            "50PH1571C4D4",
+            "h0m3md3l4",
+            "12abriljulho",
+            "santlflcada9427",
+            "minhaVIDEIRA"
+        ];
+
+        let bloqueado = false;
+
+        function verificar() {
+
+            if (bloqueado) return;
+
+            const campos = document.querySelectorAll(".password");
+
+            const respostas = Array.from(campos).map(
+                campo => campo.value
+            );
+
+            const correto = respostas.every(
+                (resposta, index) =>
+                    resposta === chavesCorretas[index]
+            );
+
+            if (correto) {
+
+                document.getElementById("login").style.display = "none";
+                document.getElementById("content").style.display = "block";
+
+            } else {
+
+                bloqueado = true;
+
+                document.getElementById("error").style.display = "block";
+
+                campos.forEach(campo => campo.disabled = true);
+
+                document.querySelector("button").disabled = true;
+
+            }
+        }
+
+    </script>
+
+</body>
+</html>
